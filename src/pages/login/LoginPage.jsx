@@ -7,8 +7,6 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const userID = sessionStorage.getItem("userId");
-
 function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -31,7 +29,7 @@ function LoginPage() {
       }
     );
     sessionStorage.setItem("userId", data.user.user_id);
-    if (status == 200 && userID) {
+    if (status == 200) {
       setTimeout(() => {
         navigate("/notes");
       }, 1000);

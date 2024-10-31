@@ -17,6 +17,8 @@
     "@mui/material": "^6.1.1",
     "@mui/x-charts": "^7.18.0",
     "axios": "^1.7.7",
+    "dexie": "^4.0.9",
+    "dexie-react-hooks": "^1.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2"

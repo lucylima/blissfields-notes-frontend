@@ -41,7 +41,8 @@ function LoginPage() {
           }
         );
         await db.user.add({
-          userID: data.user.user_id,
+          id: 1,
+          userID: data.user.user_id
         });
         setTimeout(() => {
           navigate("/notes");

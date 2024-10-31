@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import BitPostActions from "./BitPostActions";
 import axios from "axios";
-import { BitContext } from "../../context/BitsContext";
+import { BitContext } from "../../context/bitsContext";
 import { useContext } from "react";
 
 function BitPost({ Bit }) {
@@ -22,7 +22,7 @@ function BitPost({ Bit }) {
     await axios.delete(
       `https://api-blissfields-997949264503.southamerica-east1.run.app/bits/${id}`
     );
-    setBit(bit.filter((bit) => Bit.id !== id));
+    setBit(bit.filter((Bit) => Bit.id !== id));
   };
 
   return (

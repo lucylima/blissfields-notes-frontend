@@ -1,6 +1,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import Container from "@mui/material/Container";
 import Fab from "@mui/material/Fab";
+import axios from "axios";
 import { Header } from "../../components/Header/Header.jsx";
 import { useContext, useEffect, useState } from "react";
 import { Navigation } from "../../components/Navigation/Navigation.jsx";
@@ -8,9 +9,7 @@ import { Note } from "../../components/Note/Note.jsx";
 import { NewNoteModal } from "../../components/NewNoteModal/NewNoteModal.jsx";
 import { NoteContext } from "../../context/noteContext.jsx";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const userID = sessionStorage.getItem("userId");
+import { db } from "../../database/db.js";
 
 function NotePage() {
   const navigate = useNavigate();
@@ -21,13 +20,17 @@ function NotePage() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
+    const fetchID = async () => {
+      const id = await db.user.where({ id: 1 }).first();
+      return id.userID;
+    };
     const getNotes = async () => {
       const { data } = await axios.get(
-        `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${userID}`
+        `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${await fetchID()}`
       );
       setNote([...data.notes]);
     };
-    if (userID) {
+    if (fetchID()) {
       getNotes();
     } else {
       navigate("/");

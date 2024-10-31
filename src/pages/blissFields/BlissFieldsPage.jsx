@@ -8,13 +8,12 @@ import { NewBitModal } from "../../components/NewBitModal/NewBitModal.jsx";
 import { useState, useContext, useEffect } from "react";
 import { BitContext } from "../../context/bitsContext.jsx";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../database/db.js";
 
 import axios from "axios";
 
-const userID = sessionStorage.getItem("userId")
-
 function BlissFieldsPage() {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const { bit, setBit } = useContext(BitContext);
   const [open, setOpen] = useState(false);
 
@@ -22,12 +21,18 @@ const navigate = useNavigate()
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
+    const fetchID = async () => {
+      const id = await db.user.where({ id: 1 }).first();
+      return id.userID;
+    };
     const fetchBits = async () => {
-      const { data } = await axios.get("https://api-blissfields-997949264503.southamerica-east1.run.app/bits");
+      const { data } = await axios.get(
+        "https://api-blissfields-997949264503.southamerica-east1.run.app/bits"
+      );
       setBit([...data.bits]);
     };
-    userID == null ? navigate("/") : fetchBits()
-  }, []);
+    fetchID() == null ? navigate("/") : fetchBits();
+  });
 
   return (
     <>
@@ -47,7 +52,8 @@ const navigate = useNavigate()
           return (
             <BitPost
               key={bit.bits_id}
-              bit={{
+              Bit={{
+                id: bit.bits_id,
                 initials: bit.initials,
                 user: bit.User.username,
                 text: bit.text,

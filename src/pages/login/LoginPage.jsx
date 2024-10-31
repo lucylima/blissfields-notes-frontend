@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import FormHelperText from "@mui/material/FormHelperText";
 import axios from "axios";
+import { db } from "../../database/db";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -39,7 +40,9 @@ function LoginPage() {
             password,
           }
         );
-        sessionStorage.setItem("userId", data.user.user_id);
+        await db.user.add({
+          userID: data.user.user_id,
+        });
         setTimeout(() => {
           navigate("/notes");
         }, 500);

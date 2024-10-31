@@ -7,13 +7,13 @@ import { Navigation } from "../../components/Navigation/Navigation.jsx";
 import { Note } from "../../components/Note/Note.jsx";
 import { NewNoteModal } from "../../components/NewNoteModal/NewNoteModal.jsx";
 import { NoteContext } from "../../context/noteContext.jsx";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const userID = sessionStorage.getItem("userId")
+const userID = sessionStorage.getItem("userId");
 
 function NotePage() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { note, setNote } = useContext(NoteContext);
   const [open, setOpen] = useState(false);
 
@@ -27,7 +27,11 @@ function NotePage() {
       );
       setNote([...data.notes]);
     };
-    userID == null ? navigate("/") : getNotes()
+    if (userID) {
+      getNotes();
+    } else {
+      navigate("/");
+    }
   }, []);
 
   return (

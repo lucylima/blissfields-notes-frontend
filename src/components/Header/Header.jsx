@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { SettingsModal } from "../SettingsModal/SettingsModal.jsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { db } from "../../database/db.js";
 
 const pages = ["Notas", "BlissBits"];
 const settings = ["Configurações", "Logout"];
@@ -44,7 +45,7 @@ function Header() {
     }
   };
 
-  const handleCloseUserMenu = (event) => {
+  const handleCloseUserMenu = async (event) => {
     const menu = event.currentTarget.innerText;
     switch (menu) {
       case "Conta":
@@ -53,7 +54,7 @@ function Header() {
         setDialogOpen(true);
         break;
       case "Logout":
-        window.sessionStorage.removeItem("userId");
+        await db.user.clear();
         navigate("/");
         break;
     }

@@ -10,6 +10,7 @@ import Select from "@mui/material/Select";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { NoteContext } from "../../context/noteContext.jsx";
+import { db } from "../../database/db.js";
 
 const style = {
   position: "absolute",
@@ -23,7 +24,10 @@ const style = {
   py: 2,
 };
 
-const userID = sessionStorage.getItem("userId");
+const fetchID = async () => {
+  const id = await db.user.where({ id: 1 }).first();
+  return id.userID;
+};
 
 function NewNoteModal({ open, handleClose }) {
   const { note, setNote } = useContext(NoteContext);
@@ -42,7 +46,7 @@ function NewNoteModal({ open, handleClose }) {
       title,
       text,
       mood,
-      user_id: userID,
+      user_id: fetchID(),
     });
     setNote([...note, data.note]);
     handleClose();

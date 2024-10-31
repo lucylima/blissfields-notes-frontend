@@ -24,7 +24,10 @@ const style = {
   outline: 0,
 };
 
-const userID = sessionStorage.getItem("userId");
+const fetchID = async () => {
+  const id = await db.user.where({ id: 1 }).first();
+  return id.userID;
+};
 
 function EditNoteModal({ open, handleClose, fields }) {
   const { note, setNote } = useContext(NoteContext);
@@ -48,7 +51,7 @@ function EditNoteModal({ open, handleClose, fields }) {
       }
     );
     const { data } = await axios.get(
-      `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${userID}`
+      `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${fetchID()}`
     );
     setNote([...data.notes]);
     handleClose();

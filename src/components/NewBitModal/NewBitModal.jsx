@@ -19,7 +19,10 @@ const style = {
   py: 2,
 };
 
-const userID = sessionStorage.getItem("userId");
+const fetchID = async () => {
+  const id = await db.user.where({ id: 1 }).first();
+  return id.userID;
+};
 
 function NewBitModal({ open, handleClose }) {
   const { bit, setBit } = useContext(BitContext);
@@ -31,7 +34,7 @@ function NewBitModal({ open, handleClose }) {
   const handleSubmitBit = async () => {
     const { data } = await axios.post("https://api-blissfields-997949264503.southamerica-east1.run.app/bits", {
       text,
-      user_id: userID,
+      user_id: fetchID(),
     });
     setBit([...bit, data.bits]);
     handleClose();

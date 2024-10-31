@@ -42,12 +42,15 @@ function NewNoteModal({ open, handleClose }) {
 
   const handleSaveNote = async (event) => {
     event.preventDefault();
-    const { data } = await axios.post("https://api-blissfields-997949264503.southamerica-east1.run.app/notes", {
-      title,
-      text,
-      mood,
-      user_id: fetchID(),
-    });
+    const { data } = await axios.post(
+      "https://api-blissfields-997949264503.southamerica-east1.run.app/notes",
+      {
+        title,
+        text,
+        mood,
+        user_id: await fetchID(),
+      }
+    );
     setNote([...note, data.note]);
     handleClose();
   };

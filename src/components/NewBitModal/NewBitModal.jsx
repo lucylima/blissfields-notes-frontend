@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { BitContext } from "../../context/bitsContext";
+import { db } from "../../database/db.js";
 
 const style = {
   position: "absolute",
@@ -32,10 +33,13 @@ function NewBitModal({ open, handleClose }) {
   };
 
   const handleSubmitBit = async () => {
-    const { data } = await axios.post("https://api-blissfields-997949264503.southamerica-east1.run.app/bits", {
-      text,
-      user_id: await fetchID(),
-    });
+    const { data } = await axios.post(
+      "https://api-blissfields-997949264503.southamerica-east1.run.app/bits",
+      {
+        text,
+        user_id: await fetchID(),
+      }
+    );
     setBit([...bit, data.bits]);
     handleClose();
   };

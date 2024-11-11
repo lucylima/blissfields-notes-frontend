@@ -28,6 +28,7 @@ function LoginPage() {
     event.preventDefault();
 
     if (!email || !password) {
+      setError(true);
       setErrorMessage("Senha e email são obrigatórios");
     }
 
@@ -40,19 +41,24 @@ function LoginPage() {
             password,
           }
         );
+
         await db.user.add({
           id: 1,
-          userID: data.user.user_id
+          userID: data.user.user_id,
         });
+
         setTimeout(() => {
           navigate("/notes");
         }, 500);
-      } catch (error) {
-        if (error.status === 404 || error.status === 400) {
+        
+      } catch (e) {
+
+        if (e.status === 404 || e.status === 400) {
           setErrorMessage("Dados incorretos, usuário não encontrado");
           setError(true);
         }
-        if (error.status === 500) {
+
+        if (e.status === 500) {
           setErrorMessage("Erro no servidor");
         }
       }

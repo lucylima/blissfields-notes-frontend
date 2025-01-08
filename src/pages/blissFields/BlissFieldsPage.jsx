@@ -27,7 +27,7 @@ function BlissFieldsPage() {
     };
     const fetchBits = async () => {
       const { data } = await axios.get(
-        "https://api-blissfields-997949264503.southamerica-east1.run.app/bits"
+       `${import.meta.env.API_URL}/bits` 
       );
       setBit([...data.bits]);
     };

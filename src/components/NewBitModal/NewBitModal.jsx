@@ -34,7 +34,7 @@ function NewBitModal({ open, handleClose }) {
 
   const handleSubmitBit = async () => {
     const { data } = await axios.post(
-      "https://api-blissfields-997949264503.southamerica-east1.run.app/bits",
+     `${import.meta.env.API_URL}/bits`,
       {
         text,
         user_id: await fetchID(),

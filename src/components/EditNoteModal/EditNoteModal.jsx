@@ -43,7 +43,7 @@ function EditNoteModal({ open, handleClose, fields }) {
   const handleSaveNote = async (event) => {
     event.preventDefault();
     await axios.put(
-      `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${fields.id}`,
+      `${import.meta.env.API_URL}/notes/${fields.id}`,
       {
         title,
         text,
@@ -51,7 +51,7 @@ function EditNoteModal({ open, handleClose, fields }) {
       }
     );
     const { data } = await axios.get(
-      `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${fetchID()}`
+      `${import.meta.env.API_URL}/notes/${fetchID()}`
     );
     setNote([...data.notes]);
     handleClose();

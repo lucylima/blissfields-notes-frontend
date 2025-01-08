@@ -43,7 +43,7 @@ function SettingsModal({ onClose, selectedValue, open }) {
 
   const handleSaveAccount = async () => {
     const { status } = await axios.put(
-      `https://api-blissfields-997949264503.southamerica-east1.run.app/${await fetchID()}`,
+      `${import.meta.env.API_URL}/${await fetchID()}`,
       {
         username,
         password,

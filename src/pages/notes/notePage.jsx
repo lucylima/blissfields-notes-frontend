@@ -26,7 +26,7 @@ function NotePage() {
     };
     const getNotes = async () => {
       const { data } = await axios.get(
-        `https://api-blissfields-997949264503.southamerica-east1.run.app/notes/${await fetchID()}`
+        `${import.meta.env.API_URL}/notes/${await fetchID()}`
       );
       setNote([...data.notes]);
     };

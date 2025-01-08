@@ -35,7 +35,7 @@ function LoginPage() {
     if (email || password) {
       try {
         const { data } = await axios.post(
-          "https://api-blissfields-997949264503.southamerica-east1.run.app/login",
+          `${import.meta.env.API_URL}/login`,
           {
             email,
             password,

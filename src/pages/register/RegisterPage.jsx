@@ -27,7 +27,7 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { status } = await axios.post("https://api-blissfields-997949264503.southamerica-east1.run.app/user", {
+    const { status } = await axios.post(`${import.meta.env.API_URL}/user`, {
       username,
       email,
       password,

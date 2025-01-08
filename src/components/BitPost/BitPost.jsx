@@ -20,7 +20,7 @@ function BitPost({ Bit }) {
   };
   const handleDelete = async (id) => {
     await axios.delete(
-      `https://api-blissfields-997949264503.southamerica-east1.run.app/bits/${id}`
+      `${import.meta.env.API_URL}/bits/${id}`
     );
     setBit(bit.filter((Bit) => Bit.id !== id));
   };

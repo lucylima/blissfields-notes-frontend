@@ -43,7 +43,7 @@ function SettingsModal({ onClose, selectedValue, open }) {
 
   const handleSaveAccount = async () => {
     const { status } = await axios.put(
-      `${import.meta.env.API_URL}/${await fetchID()}`,
+      `${import.meta.env.VITE_API_URL}/${await fetchID()}`,
       {
         username,
         password,

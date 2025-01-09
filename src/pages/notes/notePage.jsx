@@ -26,7 +26,7 @@ function NotePage() {
     };
     const getNotes = async () => {
       const { data } = await axios.get(
-        `${import.meta.env.API_URL}/notes/${await fetchID()}`
+        `${import.meta.env.VITE_API_URL}/notes/${await fetchID()}`
       );
       setNote([...data.notes]);
     };

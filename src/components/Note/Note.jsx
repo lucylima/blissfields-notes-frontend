@@ -20,7 +20,7 @@ function Note({ Note }) {
   const handleClose = () => setOpenEditModal(false);
 
   const handleDelete = async (id) => {
-    await axios.delete(`${import.meta.env.API_URL}/notes/${id}`);
+    await axios.delete(`${import.meta.env.VITE_API_URL}/notes/${id}`);
     setNote(note.filter((n) => n.notes_id !== id));
   };
 

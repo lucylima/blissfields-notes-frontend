@@ -27,7 +27,7 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { status } = await axios.post(`${import.meta.env.API_URL}/user`, {
+    const { status } = await axios.post(`${import.meta.env.VITE_API_URL}/user`, {
       username,
       email,
       password,

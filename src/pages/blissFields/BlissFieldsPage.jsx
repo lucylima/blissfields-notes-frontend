@@ -27,7 +27,7 @@ function BlissFieldsPage() {
     };
     const fetchBits = async () => {
       const { data } = await axios.get(
-       `${import.meta.env.API_URL}/bits` 
+       `${import.meta.env.VITE_API_URL}/bits` 
       );
       setBit([...data.bits]);
     };

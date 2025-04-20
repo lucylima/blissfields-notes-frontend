@@ -1,5 +1,5 @@
 <p align="center">
-<img src="./src/assets/blissfieldstype.png"  >
+  <img src="./src/assets/blissfieldstype.png"  >
 </p>
 
 #### Blissfields Notes tem como objetivo ser um aplicativo de notas com recursos de saúde mental.
@@ -13,12 +13,6 @@
     <img src="https://skillicons.dev/icons?i=js,react,mui,vite,vercel" />
   </a>
 </p>
-
-## Objetivo do Projeto
-
-O aplicativo também inclui funcionalidades como dark mode/white mode, uma mensagem motivacional aleatória ao abrir o app, e a possibilidade de CRUDs para gerenciar tweets, usuários e o humor diário.
-
-_Curtidas e comentários nos tweets são desabilitados para manter o foco no bem-estar pessoal._
 
 ---
 

@@ -14,8 +14,6 @@
   </a>
 </p>
 
----
-
 ### Instalação
 
 1. Clone o repositório

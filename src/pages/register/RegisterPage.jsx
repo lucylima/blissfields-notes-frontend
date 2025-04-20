@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
+import FormHelperText from '@mui/material/FormHelperText'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
@@ -13,6 +14,8 @@ function RegisterPage() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
@@ -27,16 +30,27 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { status } = await axios.post(
-      `${import.meta.env.VITE_API_URL}/user`,
-      {
-        username,
-        email,
-        password,
+    if (!username || !email || !password) {
+      setError(true)
+      setErrorMessage('Senha e email são obrigatórios')
+    }
+
+    if (username || email || password) {
+      const { status } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/user`,
+        {
+          username,
+          email,
+          password,
+        }
+      )
+
+      if (status == 201) {
+        setErrorMessage('Sucesso')
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
       }
-    )
-    if (status == 201) {
-      navigate('/')
     }
   }
 
@@ -64,7 +78,7 @@ function RegisterPage() {
           sx={{
             '& > :not(style)': {
               m: 1,
-              width: '25ch',
+              width: '18rem',
               mx: 'auto',
               display: 'flex',
               flexDirection: 'column',
@@ -85,6 +99,7 @@ function RegisterPage() {
             variant='standard'
             type='text'
             onChange={handleUsernameChange}
+            error={error}
           />
 
           <TextField
@@ -105,6 +120,7 @@ function RegisterPage() {
           <Button variant='contained' onClick={handleSubmit}>
             Entrar
           </Button>
+          <FormHelperText>{errorMessage}</FormHelperText>
           <Button variant='text' component={Link} to='/'>
             Já possui cadastro? Faça login
           </Button>
